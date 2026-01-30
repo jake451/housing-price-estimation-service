@@ -1,0 +1,75 @@
+############################
+# OS / Editor
+############################
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+############################
+# Python
+############################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+.eggs/
+*.egg-info/
+.venv/
+venv/
+
+############################
+# Python packaging
+############################
+pip-wheel-metadata/
+poetry.lock 
+
+############################
+# ML artifacts / data
+############################
+data/*
+!data/sample/
+models/*
+!models/.gitkeep
+
+############################
+# Logs
+############################
+*.log
+logs/
+
+############################
+# Docker
+############################
+*.tar
+docker-compose.override.yml
+
+############################
+# Java (future-proofing)
+############################
+target/
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+build/
+
+############################
+# CI / tooling
+############################
+.env
+.env.*
+.envrc
+
+#####
+
