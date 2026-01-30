@@ -37,6 +37,7 @@ poetry.lock
 # ML artifacts / data
 ############################
 data/*
+!data/README.md
 !data/sample/
 models/*
 !models/.gitkeep
