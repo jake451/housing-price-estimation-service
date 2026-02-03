@@ -43,6 +43,39 @@ Client → REST API → ML Pipeline → Model Registry → Prediction
 ## API Design
 - `POST /train`
 - `POST /predict`
+### Example request
+```bash 
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model_id": "latest",
+    "features": {
+      "bedrooms": 3,
+      "bathrooms": 2.25,
+      "sqft_living": 1960,
+      "sqft_lot": 5000,
+      "floors": 2,
+      "waterfront": 0,
+      "view": 0,
+      "condition": 3,
+      "grade": 7,
+      "yr_built": 1996,
+      "yr_renovated": 0,
+      "zipcode": "98103",
+      "lat": 47.6610,
+      "long": -122.3426
+    }
+  }'
+```
+### Example Response
+```bash
+{
+  "model_id": "2026-02-01T12-34-56Z_abc123",
+  "prediction": 845230.12,
+  "currency": "USD",
+  "created_at": "2026-02-01T22:10:33.421Z"
+}
+```
 - `GET  /model/{model_id}`
 - `GET  /health`
 

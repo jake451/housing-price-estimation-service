@@ -1,0 +1,216 @@
+{
+  "$defs": {
+    "PropertyFeatures": {
+      "additionalProperties": false,
+      "properties": {
+        "bedrooms": {
+          "description": "Number of bedrooms",
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Bedrooms",
+          "type": "integer"
+        },
+        "bathrooms": {
+          "description": "Number of bathrooms (can be fractional)",
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Bathrooms",
+          "type": "number"
+        },
+        "sqft_living": {
+          "description": "Interior living area in square feet",
+          "maximum": 20000,
+          "minimum": 100,
+          "title": "Sqft Living",
+          "type": "integer"
+        },
+        "sqft_lot": {
+          "anyOf": [
+            {
+              "maximum": 200000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Lot size in square feet (if available)",
+          "title": "Sqft Lot"
+        },
+        "floors": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Number of floors",
+          "title": "Floors"
+        },
+        "waterfront": {
+          "anyOf": [
+            {
+              "enum": [
+                0,
+                1
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "1 if waterfront, else 0",
+          "title": "Waterfront"
+        },
+        "view": {
+          "anyOf": [
+            {
+              "maximum": 4,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "View rating (0-4)",
+          "title": "View"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "maximum": 5,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Condition rating (1-5)",
+          "title": "Condition"
+        },
+        "grade": {
+          "anyOf": [
+            {
+              "maximum": 13,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Construction grade (1-13)",
+          "title": "Grade"
+        },
+        "yr_built": {
+          "description": "Year built",
+          "maximum": 2100,
+          "minimum": 1800,
+          "title": "Yr Built",
+          "type": "integer"
+        },
+        "yr_renovated": {
+          "anyOf": [
+            {
+              "maximum": 2100,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Year renovated, or 0/None if never",
+          "title": "Yr Renovated"
+        },
+        "zipcode": {
+          "description": "US 5-digit ZIP code",
+          "pattern": "^\\d{5}$",
+          "title": "Zipcode",
+          "type": "string"
+        },
+        "lat": {
+          "anyOf": [
+            {
+              "maximum": 90,
+              "minimum": -90,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Latitude",
+          "title": "Lat"
+        },
+        "long": {
+          "anyOf": [
+            {
+              "maximum": 180,
+              "minimum": -180,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Longitude",
+          "title": "Long"
+        }
+      },
+      "required": [
+        "bedrooms",
+        "bathrooms",
+        "sqft_living",
+        "yr_built",
+        "zipcode"
+      ],
+      "title": "PropertyFeatures",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Model version to use. If ommitted, the service uses the latest model.",
+      "examples": [
+        "2026-02-01T12-34-56Z_abc123"
+      ],
+      "title": "Model Id"
+    },
+    "features": {
+      "$ref": "#/$defs/PropertyFeatures"
+    }
+  },
+  "required": [
+    "features"
+  ],
+  "title": "PredictRequest",
+  "type": "object"
+}
