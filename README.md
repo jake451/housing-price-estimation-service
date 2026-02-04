@@ -41,9 +41,31 @@ measurable improvements.
 Client → REST API → ML Pipeline → Model Registry → Prediction
 
 ## API Design
-- `POST /train`
-- `POST /predict`
-### Example request
+### `POST /train`
+  Train a new housing price estimation model from tabular data.
+
+**Example request**
+```bash 
+curl -X POST "http://localhost:8000/train" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dataset": "house_sales.csv"
+  }'
+```
+**Example Response**
+```json
+{
+  "model_id": "2026-02-03T19-12-01Z_abc123",
+  "metrics": { "mae": 84213.5, "rmse": 121044.2, "r2": 0.72 },
+  "trained_at": "2026-02-03T19:12:01Z",
+  "feature_columns": ["bedrooms","bathrooms","sqft_living","zipcode", "..."]
+}
+```
+
+### `POST /predict`
+  Return a single price prediction for a set of property features.
+
+**Example request**
 ```bash 
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
@@ -67,8 +89,8 @@ curl -X POST "http://localhost:8000/predict" \
     }
   }'
 ```
-### Example Response
-```bash
+**Example Response**
+```json
 {
   "model_id": "2026-02-01T12-34-56Z_abc123",
   "prediction": 845230.12,
@@ -76,8 +98,41 @@ curl -X POST "http://localhost:8000/predict" \
   "created_at": "2026-02-01T22:10:33.421Z"
 }
 ```
-- `GET  /model/{model_id}`
-- `GET  /health`
+### `GET  /model/{model_id}`
+  Retrieve model metadata and evaluation metrics by model ID.
+
+**Example request**
+```bash 
+curl -X GET "http://localhost:8000/model/{model_id}" \
+  -H "Content-Type: application/json"
+```
+**Example Response**
+```json
+{
+  "model_id": "2026-02-03T19-12-01Z_abc123",
+  "trained_at": "2026-02-03T19:12:01Z",
+  "model_type": "linear",
+  "metrics": { "mae": 84213.5, "rmse": 121044.2, "r2": 0.72 },
+  "feature_columns": ["bedrooms","bathrooms","sqft_living","zipcode", "..."],
+  "artifacts": {
+    "pipeline_path": "models/2026-02-03T19-12-01Z_abc123/model.joblib",
+    "metadata_path": "models/2026-02-03T19-12-01Z_abc123/metadata.json"
+  }
+}
+```
+### `GET  /health`
+  Health check endpoint used to verify the service is running.
+
+**Example request**
+```bash 
+curl -X GET "http://localhost:8000/health"
+```
+**Example Response**
+```json
+{ 
+  "status": "ok"
+}
+```
 
 ## Local Development and Running
 ```bash
