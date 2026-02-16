@@ -16,16 +16,20 @@ from housing_price_estimation_service.schemas.model import (
     ModelRequest,
     ModelResponse, Artifacts,
 )
+from housing_price_estimation_service.services.rent_estimator import RentEstimatorService
 
 DEFAULT_DATASET = "house_sales.csv"
 
 router = APIRouter()
+svc = RentEstimatorService()
 
 @router.post("/train", response_model=TrainResponse)
 def train(request: Optional[TrainRequest] = None):
     dataset = DEFAULT_DATASET
     if request and request.dataset:
         dataset=request.dataset
+
+    svc.train(dataset)
 
     # stub for now
     return TrainResponse(

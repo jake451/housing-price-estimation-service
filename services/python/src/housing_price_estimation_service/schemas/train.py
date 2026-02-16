@@ -14,6 +14,12 @@ class Metrics(BaseModel):
     rmse: float = Field(..., ge=0, description="Root Mean Squared Error")
     r2: float = Field(..., ge=-1, le=1, description="R^2 Score")
 
+class Artifacts(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    pipeline_path: str
+    metadata_path: str
+
 class TrainRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -32,7 +38,4 @@ class TrainResponse(BaseModel):
     metrics: Metrics
     trained_at: datetime
     feature_columns: list[str]
-    artifacts: {
-        pipeline_path: str,
-        metadata_path: str,
-    }
+    artifacts: Optional[Artifacts] = None
