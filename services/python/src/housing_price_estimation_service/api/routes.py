@@ -29,17 +29,17 @@ def train(request: Optional[TrainRequest] = None):
     if request and request.dataset:
         dataset=request.dataset
 
-    svc.train(dataset)
+    metrics = svc.train(dataset)
 
     # stub for now
     return TrainResponse(
         model_id="stub",
         metrics=Metrics(
-            mae=0.0,
-            rmse=0.0,
-            r2=0.0
+            mae=metrics["mae"],
+            rmse=metrics["rmse"],
+            r2=metrics["r2"],
         ),
-        trained_at=datetime(2026,2,3,tzinfo=timezone.utc),
+        trained_at=datetime.now(timezone.utc),
         feature_columns=[]
     )
 
