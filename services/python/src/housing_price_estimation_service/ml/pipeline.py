@@ -9,7 +9,16 @@ NUMERIC_FEATURES = [
     "bedrooms",
     "bathrooms",
     "sqft_living",
-    "grade"
+    "grade",
+    "yr_built",
+    "yr_renovated",
+    "sqft_lot",
+    "floors",
+    "condition",
+    "lat",
+    "long",
+    "waterfront",
+    "view",
 ]
 
 CATEGORICAL_FEATURES = [
